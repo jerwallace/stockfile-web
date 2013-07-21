@@ -1,82 +1,86 @@
 <?php
+class User {
 
-/*
- * This actor model holds information about an actor.
- * @author Jeremy Wallace
- * @org University of British Columbia
- * @date June 16, 2013
- */
-
-class Actor {
-
-    private $id = 0;
+    private $username = 0;
     private $firstname = "";
     private $lastname = "";
-    private $gender = "";
-    private $movies = array();
+    private $email = "";
+    private $dateJoined = "";
+    private $passwordHash = "";
 
     public function __construct($id) {
-        $this->id = $id;
-        $this->loadActorInfo();
-        $this->loadActorMovies();
+        $this->username = $username;
+        $this->loadUserInfo();
     }
 
+    public function getUsername()
+    {
+    	return $this->username;
+    }
+    
+    public function setUsername($userName)
+    {
+    	$this->username = $userName;
+    } 
+    
+    public function setPasswordHash($password)
+    {
+    	$this->passwordHash = $password;
+    }
+    
+    public function getPasswordHash()
+    {
+    	return $this->passwordHash;
+    }
+    
     public function setName($firstname, $lastname) {
         $this->firstname = $firstname;
         $this->lastname = $lastname;
     }
 
     public function getName() {
-        return $this->firstname . " " . $this->lastname;
+        return $this->lastname . ", " . $this->firstname;
+    }
+    
+    public function setEmail($Email)
+    {
+		$this->email = $Email;    	    	
+    }
+    
+    public function setDateJoined($datejoined)
+    {
+    	$this->dateJoined = $datejoined;
+    }
+    
+    public function getEmail()
+    {
+    	 return $this->email;
+    }
+    
+    public function getDateJoined()
+    {
+    	return $this->dateJoined;
+    }
+    
+    public function getFiles()
+    {
+    	return $this->files;
     }
 
-    public function getGender() {
-        return $this->gender;
-    }
-
-    public function getMovies() {
-        return $this->movies;
-    }
-
-    public function setGender($gender) {
-        $this->gender = $gender;
-    }
-
-    public function setMovies($movies) {
-        $this->gender = $movies;
-    }
-
-    /**
-     * Loads all of the actor information.
-     * @global type $db
-     */
-    private function loadActorInfo() {
+    private function loadUserInfo() {
 
         global $db;
 
-        $st = $db->prepare("SELECT * FROM actors WHERE id = :id");
-        $st->execute(array(":id" => $this->id));
+        $st = $db->prepare("SELECT * FROM user WHERE username = :username");
+        $st->execute(array(":username" => $this->username));
 
 
         $aData = $st->fetch();
 
         $this->setName($aData['first_name'], $aData['last_name']);
-        $this->setGender($aData['gender']);
-    }
-
-    /**
-     * Loads all of the movies that the actor is in.
-     * @global type $db
-     */
-    private function loadActorMovies() {
-
-        global $db;
-
-        $st = $db->prepare("SELECT movies.*, roles.* FROM actors, movies, roles 
-                WHERE actors.id = :id AND actors.id = roles.actor_id AND movies.id = roles.movie_id");
-
-        $st->execute(array(":id" => $this->id));
-        $this->movies = $st->fetchAll();
+        $this->setEmail($aData['email']);
+        $this->setDateJoined($aData['date_joined']);
+        $this->setPasswordHash($aData['password']);
     }
 
 }

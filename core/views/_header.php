@@ -18,7 +18,6 @@
 		<div id="wrapper">
         	
 			<header>
-                                <div id="add-link"><a href="?login">Login to stockfile</a></div>
 				<a href="index.php"><img src="images/logo.png" class="logo" alt="banner logo" /></a>
 				Welcome to Stockfile.
 			</header>
@@ -28,3 +27,4 @@
                                  <div id="content">
                                      <h1><?php echo $title; ?></h1>
                                      <p><?php echo $caption; ?></p>
+                                     

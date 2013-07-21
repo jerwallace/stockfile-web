@@ -7,7 +7,7 @@
  * @date June 16, 2013
  */ 
 
-define ( 'DB_HOST', 'data.stockfile.ca' );
+define ( 'DB_HOST', 'sf1.stockfile.ca' );
 define ( 'DB_USER', 'stockdata' );
 define ( 'DB_PASS', 'M$$data13!' );
 define ( 'DB_NAME', 'Stockfile' );
