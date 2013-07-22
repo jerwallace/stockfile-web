@@ -19,7 +19,7 @@
 		
  		//+++++++++++++++++++++++++++++++++NEW QUERY+++++++++++++++++++++++++++++++++++
 		
-// 		$db = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME.";charset=utf8", DB_USER, DB_PASS);
+ 		$db = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME.";charset=utf8", DB_USER, DB_PASS);
 		
 // 		$username = "jeremy";
 		
@@ -35,28 +35,28 @@
 
 		//+++++++++++++++++++++++++++++++++NEW QUERY+++++++++++++++++++++++++++++++++++
 				
-// 		$username = "jeremy";
+		$username = "jeremy";
 		
-// 		$thisUserName = $db->quote($username);
+		$thisUserName = $db->quote($username);
 			
-// 		$password = hash('sha256', 'wallace123');
+		$password = hash('sha256', 'wallace123');
 		
-// 		$thisPassword = $db->quote($password);
+		$thisPassword = $db->quote($password);
 		
-// 		$request = $db->prepare("SELECT * FROM user WHERE username=$thisUserName AND password=$thisPassword");
+		$request = $db->prepare("SELECT * FROM user WHERE username=$thisUserName AND password=$thisPassword");
 
-// 		$request->execute();
+		$request->execute();
 
-// 		$result = $request->fetchAll(PDO::FETCH_NUM);
+		$result = $request->fetchAll(PDO::FETCH_NUM);
 		
-// 		if(sizeof($result)>0) {
-// 			print "true, User Name is: " . $result[0][0];
-// 		} else
-// 		{
-// 			print " false ";
-// 		}
+		if(sizeof($result)>0) {
+			print "true, User Name is: " . $result[0][0];
+		} else
+		{
+			print " false ";
+		}
 
-// 		print var_dump($result);
+		print var_dump($result);
 
 		//+++++++++++++++++++++++++++++++++NEW QUERY+++++++++++++++++++++++++++++++++++
 		

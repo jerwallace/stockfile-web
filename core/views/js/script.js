@@ -1,22 +1,25 @@
+var name = $('content').firstChild.nextSibling.innerHTML;
+
 window.onload = function() {
-	refreshFiles();
-	refreshClients();
 	
 	document.getElementById("logout").type = "submit";
 	
-	setInterval(function(){refreshFiles()},3000);
-	setInterval(function(){refreshClients()},3000);
+	var username = $('content').firstChild.nextSibling.innerHTML;
+	
+	refreshFiles(username);
+	refreshClients(username);
+
+	setInterval(function(){refreshFiles(username)},3000);
+	setInterval(function(){refreshClients(username)},3000);
 };
 
-
-
-function refreshClients(){
+function refreshClients(username){
 		
-	var JSONobj = 'jeremy';
+	var JSONobj = username;
 
 	new Ajax.Request
 	(			
-		"updateClientsTable.php",
+		"core/bin/updateClientsTable.php",
 		{
 			method: 'post',
 			requestHeaders: {Accept: 'application/json'},
@@ -27,13 +30,13 @@ function refreshClients(){
 	
 }
 
-function refreshFiles(){	
+function refreshFiles(username){	
 	
-	var JSONobj = 'jeremy';
+	var JSONobj = username;
 
 	new Ajax.Request
 	(			
-		"updateFilesTable.php",
+		"core/bin/updateFilesTable.php",
 		{
 			method: 'post',
 			requestHeaders: {Accept: 'application/json'},
@@ -104,6 +107,7 @@ function populateFilesTable (response) {
 		input.id = "delete-"+count;
 		input.type = "submit";
 		input.value = "delete";
+		input.observe("click", deleteClick);
 		td3.appendChild(input);
 		tr.appendChild(td3);
 		
@@ -177,3 +181,41 @@ function populateClientsTable (response) {
 		count++;
 	}
 }
+
+function deleteClick() {
+	var x;
+	var r=confirm("Are you sure you want to delete this file?");
+	if (r==true) {
+		var rowNumber = "row"+this.id.split("-")[1];
+		deleteFile(rowNumber);
+	}
+}
+
+function deleteFile(rowNumber) {
+	
+	row = $(rowNumber);
+	
+	var filePath = row.innerHTML.split("<td>")[1].split("</td>")[0];
+	
+	var fileName = row.innerHTML.split("<td>")[2].split("</td>")[0];
+	
+//	var JSONobj = 
+//				'{ "filePath":' + '"' + filePath + '"' + ',' + '"fileName":' + '"' 
+//				+ fileName + '"' + ',' + '"userName":' + '"' + name + '"' + '}';
+	
+	var JSONobj = filePath + ',' + fileName + ',' + name;
+	
+	new Ajax.Request
+	(			
+		"core/bin/deleteUserFile.php",
+		{
+			method: 'post',
+			requestHeaders: {Accept: 'application/json'},
+			parameters: {items: JSONobj}
+		}
+	);
+}
+
+
+
+

@@ -2,7 +2,7 @@
             </article>
             <br />
             <div id="copyright">
-            	All rights reserved &copy PBJ Development.
+            	All rights reserved &copy PBJ Development Group.
             </div>
 		</div> <!-- end of #frame div -->
 	</body>

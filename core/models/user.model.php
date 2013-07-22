@@ -1,7 +1,7 @@
 <?php
 class User {
 
-    private $username = 0;
+    private $username = "";
     private $firstname = "";
     private $lastname = "";
     private $email = "";
@@ -9,7 +9,7 @@ class User {
     private $passwordHash = "";
 
     public function __construct($id) {
-        $this->username = $username;
+        $this->username = $id;
         $this->loadUserInfo();
     }
 

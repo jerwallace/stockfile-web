@@ -1,6 +1,5 @@
-<?php render('_header',array('title'=>$title,'caption'=>$caption))?>
+<?php render('_header', array(title=>$_SESSION['username']))?>
 
-$user->getFirstName();
-$user->getLastName();
+<script src="core/views/js/script.js"></script>
 
 <?php render('_footer')?>

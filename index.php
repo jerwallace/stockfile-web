@@ -7,7 +7,7 @@ require_once "core/mysql.php";
 require_once "core/helper.php";
 require_once "core/controllers/home.controller.php";
 require_once "core/controllers/user.controller.php";
-require_once "core/models/file.model.php";
+require_once "core/controllers/login.controller.php";
 require_once "core/models/user.model.php";
 
 // This will allow the browser to cache the pages of the store.
@@ -16,27 +16,34 @@ header('Pragma: cache');
 header("Last-Modified: " . gmdate("D, d M Y H:i:s", time()) . " GMT");
 header("Expires: " . gmdate("D, d M Y H:i:s", time() + 3600) . " GMT");
 
-try {
-    if(isset($_POST["login"]))
-    {
-    	$username = $_POST["username"];
-    	$hashed = hash('sha256', $_POST["password"]);
-    	$controller = new LoginController($username, $hashed);
-    	header("Location:index.php?userid=".$username);
-    }
-    
-    if (isset($_SESSION["username"])) {
-    	
-    	$this->thisUser = new User($username);
-    	$controller = new UserController($username,$hashed);
-    	
-    } else {
-    	$controller = new HomeController();
-    }
-    
-    $controller->handleRequest();
-    
-} catch (Exception $e) {
-    // Display the error page using the "render()" helper function:
-    render('error', array('message' => $e->getMessage()));
-}
+ 
+
+	if(isset($_POST['logout']))
+	{
+		session_unset();
+		session_destroy();
+		$controller = new HomeController();
+	}
+	if(isset($_POST["username"]) && isset($_POST["password"]))
+	{
+		$username = $_POST["username"];
+		$hashed = hash('sha256', $_POST["password"]);
+		try {
+			$controller = new LoginController($username, $hashed);
+			header("Location:index.php");
+		} catch (Exception $e) {
+			//render('error', array('message' => $e->getMessage()));
+		}
+	}
+	else if (isset($_SESSION["username"])) {
+			
+		$username = $_SESSION["username"];
+		$thisUser = new User($username);
+		$controller = new UserController($username);
+			
+	} else {
+		$controller = new HomeController();
+	}
+	$controller->handleRequest();
+	
+?>

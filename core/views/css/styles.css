@@ -188,6 +188,11 @@ header {
     border-radius:15px 15px 0px 0px;
 }
 
+#logout {
+	float:right;
+	margin: 1em;
+}
+
 #copyright {
 	text-align: center;
 	padding-bottom: 5pt;
