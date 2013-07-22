@@ -2,59 +2,56 @@
 class UserController {
 
 	private $thisUser;
-	private $userFiles;
+	private $fileList = array();
 	
-	public function __construct ($username,$password) {
+	public function __construct ($username) {
 		
-		if(!authenticateUseruser($username, $password)) {
-			throw Exception("Sorry, password failed!");
-		} else {
-			$_SESSION["userName"] = $username;
-			$this->thisUser = new User($username);
-		}
+		$this->thisUser = $username;
+		
+		$this->getFilesByUser($username);
+		$this->handleRequest();
 	}
 	
-	public function getFilesByUser() {
+	public function getFilesByUser($userName) {
 				
 		global $db;
 		
-		$st = $db->prepare("SELECT file_path, file_name FROM Stockfile.user_file JOIN Stockfile.user 
-							ON Stockfile.user.username = Stockfile.user_file.username
-							WHERE Stockfile.user.username = :username;");
+		$thisUserName = $db->quote($username);
 		
-		$st->execute(array("username" => $thisUser));
-	
-		$aData = $st->fetch();
+		$request = $db->prepare("SELECT file_path, file_name FROM user_file JOIN user
+							ON user.username = user_file.username
+							WHERE user.username=$thisUserName");
+				
+		$request->execute();
+
+		$results = $request->fetchAll(PDO::FETCH_NUM);
 		
-		$fileList = array();
-		
-		$counter = 0;
-		
-		while ($row = mysql_fetch_array($aData))
-		{
-			$filePath = $row['file_path'];
-			$fileName = $row['file_name'];
-			$fileList[$counter] = new File($filePath, $fileName);
-			$counter++;
-		} 
+		displayResultsTable($userName, $results);
 	}
-	
-	public function authenticateUser($username, $password)
+
+	public function displayResultsTable($username,$aData)
 	{
-		global $db;
+?>
+		<h2>Here is the list of your files: <?php print $username?></h2>
 		
-		$st = $db->prepare("SELECT * FROM user WHERE username = :username AND password = :password;");
-		
-		$st->execute(array("username" => $thisUser, "password" => sha1($password)));
-		
-		$aData = $st->fetch();
-		
-		if(mysql_num_rows($aData)==0) {
-			return false;
-		}
-		else {
-			return true;
-		}
+		<table id = "fileListTable">
+			<tr>
+			<th>File Path</th>
+			<th>File Name</th>
+			</tr>
+			<?php
+			foreach ($aData as $result)
+			{
+			?>
+			  <tr>
+			    <td><?php print $result[0];?></td>
+			    <td><?php print $result[1];?></td>
+			  </tr>
+			<?php
+			}
+			?>
+		</table>
+<?php
 	}
 	
 	public function handleRequest() {

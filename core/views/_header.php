@@ -12,6 +12,11 @@
         
         <script src="//ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js"></script>
         <script src="core/views/js/scripts.js"></script>
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/scriptaculous/1.9.0/scriptaculous.js"
+ 				type="text/javascript"></script>
+ 				
+        <script src="testScript.js"></script>
 	</head>
 
 	<body>
@@ -27,4 +32,6 @@
                                  <div id="content">
                                      <h1><?php echo $title; ?></h1>
                                      <p><?php echo $caption; ?></p>
+                                     <div id="fileList"></div>
+                                     <div id="clientList"></div>
                                      
