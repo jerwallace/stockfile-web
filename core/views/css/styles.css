@@ -150,6 +150,7 @@ table {
     width:100%;
     border:1px solid #ccc;   
     border-collapse:collapse;
+    margin-bottom: 1em;
 }
 
 table td, table th {
@@ -166,6 +167,10 @@ table th {
 
 table th {
     background-color:#ccc;
+}
+
+table caption {
+	padding: 1em;
 }
 
 table tr:nth-child(even) {

@@ -1,16 +1,7 @@
 window.onload = function() {
-
-	var files = document.getElementById("fileList");
-	var h2 = new Element('h2');
-	h2.innerHTML = ("Here is the list of your files:");
-	files.appendChild(h2);
+	refreshFiles();
+	refreshClients();
 	
-	var clients = document.getElementById("clientList");
-	var h2 = new Element('h2');
-	h2.innerHTML = ("Here is the list of your clients:");
-	clients.appendChild(h2);
-		
-	var refreshBtn = document.getElementById("refresh");
 	setInterval(function(){refreshFiles()},3000);
 	setInterval(function(){refreshClients()},3000);
 };
@@ -70,6 +61,10 @@ function populateFilesTable (response) {
 	
 	content.appendChild(table);
 	
+	var caption = new Element('caption');
+	caption.innerHTML = "Here is the list of your files" ;
+	table.appendChild(caption);
+	
 	var trHeader = new Element('tr');
 	table.appendChild(trHeader);
 	
@@ -120,7 +115,7 @@ function populateClientsTable (response) {
 		
 	var listSize = myObject.length;
 	
-var myObject = JSON.parse(response.responseText);
+	var myObject = JSON.parse(response.responseText);
 	
 	var listSize = myObject.length;
 	
@@ -136,6 +131,10 @@ var myObject = JSON.parse(response.responseText);
 	table.id = "clientListTable";
 	
 	content.appendChild(table);
+	
+	var caption = new Element('caption');
+	caption.innerHTML = "Here is the list of your clients" ;
+	table.appendChild(caption);
 	
 	var trHeader = new Element('tr');
 	table.appendChild(trHeader);
@@ -166,11 +165,11 @@ var myObject = JSON.parse(response.responseText);
 		tr.appendChild(td1);
 		
 		var td2 = new Element('td');
-		td2.innerHTML = myObject[i][3];
+		td2.innerHTML = myObject[i][2];
 		tr.appendChild(td2);
 		
 		var td3 = new Element('td');	
-		td3.innerHTML = myObject[i][2];
+		td3.innerHTML = myObject[i][3];
 		tr.appendChild(td3);
 		
 		count++;
