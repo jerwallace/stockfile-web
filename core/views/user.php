@@ -1,6 +1,5 @@
 <?php render('_header',array('title'=>$title,'caption'=>$caption))?>
 
-$user->getFirstName();
-$user->getLastName();
+<script src="testScript.js"></script>
 
 <?php render('_footer')?>

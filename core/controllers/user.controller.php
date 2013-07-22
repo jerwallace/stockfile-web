@@ -4,19 +4,19 @@ class UserController {
 	private $thisUser;
 	private $fileList = array();
 	
-	public function __construct ($username) {
+	function __construct ($username) {
 		
 		$this->thisUser = $username;
 		
 		$this->getFilesByUser($username);
-		$this->handleRequest();
+// 		$this->handleRequest();
 	}
 	
 	public function getFilesByUser($userName) {
 				
 		global $db;
 		
-		$thisUserName = $db->quote($username);
+		$thisUserName = $db->quote($userName);
 		
 		$request = $db->prepare("SELECT file_path, file_name FROM user_file JOIN user
 							ON user.username = user_file.username
@@ -26,11 +26,10 @@ class UserController {
 
 		$results = $request->fetchAll(PDO::FETCH_NUM);
 		
-		displayResultsTable($userName, $results);
+// 		$this->displayResultsTable($userName, $results);
 	}
 
-	public function displayResultsTable($username,$aData)
-	{
+	public function displayResultsTable($username, $aData) {
 ?>
 		<h2>Here is the list of your files: <?php print $username?></h2>
 		
@@ -56,10 +55,10 @@ class UserController {
 	
 	public function handleRequest() {
 		render('user', array(
-		'title' => 'Welcome to StockFile!',
-		'caption' => 'Take a look at your files.',
-		'user' => $this->user,
-		'filelist' => $this->userFiles
+		'title' => NULL,
+ 		'caption' => NULL,
+// 		'user' => $this->user,
+// 		'filelist' => $this->userFiles
 				));
 	}
 

@@ -15,8 +15,7 @@
         
         <script src="http://ajax.googleapis.com/ajax/libs/scriptaculous/1.9.0/scriptaculous.js"
  				type="text/javascript"></script>
- 				
-        <script src="testScript.js"></script>
+
 	</head>
 
 	<body>
@@ -26,7 +25,11 @@
 				<a href="index.php"><img src="images/logo.png" class="logo" alt="banner logo" /></a>
 				Welcome to Stockfile.
 			</header>
-
+			
+			<form method="post">
+				<input id="logout" type="hidden" value="log out">
+			</form>
+			
 			<article>
 				<!-- your HTML output follows -->
                                  <div id="content">

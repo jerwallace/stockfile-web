@@ -2,6 +2,8 @@ window.onload = function() {
 	refreshFiles();
 	refreshClients();
 	
+	document.getElementById("logout").type = "submit";
+	
 	setInterval(function(){refreshFiles()},3000);
 	setInterval(function(){refreshClients()},3000);
 };
