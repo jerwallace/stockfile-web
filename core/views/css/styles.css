@@ -1,7 +1,7 @@
 /* CSS Document */
 
 body {
-    background: #660066;
+    background: url('/images/stockfile-bg.jpg');
     background-size: 100% auto;
     font-family:Verdana, Tahoma, sans-serif;
     font-size:0.9em;
@@ -73,7 +73,8 @@ fieldset {
 }
 
 #wrapper {
-    background:#fff;
+    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.95);
     max-width: 500px;
     margin:10px auto 10px auto;
     -moz-box-shadow: 0px 0px 4px #888;
@@ -136,10 +137,31 @@ article {
     margin:0;
 }
 
-#content {
+.content {
     max-width:600px;
     margin:auto;
     text-align: center;
+}
+
+.download {
+	text-align: center;
+	padding-bottom:10px;
+}
+
+.download a {
+	color:#333;
+	text-decoration:none;
+	
+}
+
+.download a:hover {
+	text-decoration:underline;
+}
+
+footer {
+	margin:0;
+	padding:10px;
+	border-radius:0px 0px 15px 15px;
 }
 
 #search {
@@ -178,8 +200,9 @@ table tr:nth-child(even) {
 }
 
 header, footer {
-    color:#fff;
-    padding:10px 10px 10px 20px;
+	color:#fff;
+    background-color:#A64DFF;
+    padding:10px 10px 10px 5px;
     font-weight:bold;
     text-align: center;
 }
@@ -197,4 +220,9 @@ header {
 	text-align: center;
 	padding-bottom: 5pt;
 	font-family: monospace;
+}
+
+article p {
+	text-align:left;
+	padding:0px 15px 0px 15px;
 }

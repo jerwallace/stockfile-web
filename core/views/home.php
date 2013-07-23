@@ -1,4 +1,4 @@
-<?php render('_header',array('title'=>$title,'caption'=>$caption))?>
+<?php render('_header',array('title'=>$title,'caption'=>$caption,'description'=>$description,'loginmessage'=>$loginmessage))?>
 
 <?php render('_loginform');?>
 

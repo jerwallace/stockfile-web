@@ -12,7 +12,9 @@ class HomeController {
     public function handleRequest() {
         render('home', array(
             'title' => 'Welcome to StockFile!',
-            'caption' => 'Please login to check out your files.'
+            'caption' => 'Stockpile your files.',
+            'description' => "Here at StockFile, we believe that nothing is worth throwing out. Let's face it folks, we are hoarders by nature. So, instead of filling up your precious SSD space, let us hold your stockpile of files.",
+            'loginmessage' => 'Please login using the form below.'
         ));
     }
 
